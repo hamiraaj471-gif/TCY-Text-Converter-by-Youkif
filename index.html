@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCY Text Converter by Youkif</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-language"></i>
+                <h1>TCY Text Converter</h1>
+            </div>
+            <p class="subtitle">Convert text to any language, Morse code, binary, and more!</p>
+            <p class="author">by Youkif</p>
+        </header>
+
+        <main class="main-content">
+            <div class="input-section">
+                <div class="input-header">
+                    <label for="inputText">Enter your text:</label>
+                    <button class="clear-btn" onclick="clearInput()">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+                <textarea 
+                    id="inputText" 
+                    placeholder="Type your text here..." 
+                    rows="4"
+                    maxlength="5000"
+                ></textarea>
+                <div class="char-counter">
+                    <span id="charCount">0</span>/5000 characters
+                </div>
+            </div>
+
+            <div class="converter-grid">
+                <!-- Language Translation Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-globe"></i>
+                        <h3>Language Translation</h3>
+                    </div>
+                    <div class="card-content">
+                        <select id="targetLanguage" class="language-select">
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="it">Italian</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="ru">Russian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="zh">Chinese (Simplified)</option>
+                            <option value="ar">Arabic</option>
+                            <option value="hi">Hindi</option>
+                            <option value="th">Thai</option>
+                            <option value="vi">Vietnamese</option>
+                            <option value="tr">Turkish</option>
+                            <option value="pl">Polish</option>
+                            <option value="nl">Dutch</option>
+                            <option value="sv">Swedish</option>
+                            <option value="da">Danish</option>
+                            <option value="no">Norwegian</option>
+                            <option value="fi">Finnish</option>
+                        </select>
+                        <button class="convert-btn" onclick="translateText()">
+                            <i class="fas fa-exchange-alt"></i> Translate
+                        </button>
+                        <div class="output-box" id="translationOutput">
+                            Translation will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Morse Code Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-signal"></i>
+                        <h3>Morse Code</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToMorse()">
+                            <i class="fas fa-dot-circle"></i> Convert to Morse
+                        </button>
+                        <div class="output-box" id="morseOutput">
+                            Morse code will appear here...
+                        </div>
+                        <div class="morse-controls">
+                            <button class="play-btn" onclick="playMorse()" id="playMorseBtn">
+                                <i class="fas fa-play"></i> Play Audio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Binary Code Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Binary Code</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToBinary()">
+                            <i class="fas fa-microchip"></i> Convert to Binary
+                        </button>
+                        <div class="output-box" id="binaryOutput">
+                            Binary code will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hexadecimal Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-hashtag"></i>
+                        <h3>Hexadecimal</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToHex()">
+                            <i class="fas fa-calculator"></i> Convert to Hex
+                        </button>
+                        <div class="output-box" id="hexOutput">
+                            Hexadecimal code will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Base64 Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-lock"></i>
+                        <h3>Base64</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToBase64()">
+                            <i class="fas fa-key"></i> Encode Base64
+                        </button>
+                        <div class="output-box" id="base64Output">
+                            Base64 encoded text will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ASCII Values Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-list-ol"></i>
+                        <h3>ASCII Values</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToASCII()">
+                            <i class="fas fa-sort-numeric-up"></i> Convert to ASCII
+                        </button>
+                        <div class="output-box" id="asciiOutput">
+                            ASCII values will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROT13 Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>ROT13 Cipher</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToROT13()">
+                            <i class="fas fa-redo"></i> Apply ROT13
+                        </button>
+                        <div class="output-box" id="rot13Output">
+                            ROT13 encoded text will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- URL Encoding Section -->
+                <div class="converter-card">
+                    <div class="card-header">
+                        <i class="fas fa-link"></i>
+                        <h3>URL Encoding</h3>
+                    </div>
+                    <div class="card-content">
+                        <button class="convert-btn" onclick="convertToURL()">
+                            <i class="fas fa-percent"></i> URL Encode
+                        </button>
+                        <div class="output-box" id="urlOutput">
+                            URL encoded text will appear here...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copy All Results Section -->
+            <div class="results-section">
+                <div class="results-header">
+                    <h3>All Results</h3>
+                    <button class="copy-all-btn" onclick="copyAllResults()">
+                        <i class="fas fa-copy"></i> Copy All Results
+                    </button>
+                </div>
+                <div class="all-results" id="allResults">
+                    Convert some text to see all results here...
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 TCY Text Converter by Youkif. Convert text to any format you need!</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
